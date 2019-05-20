@@ -12,7 +12,7 @@ test_qt
 	IF NOT EXIST %1.test/%%a (
 		mkdir %1.test/%%a
 	)
-	conan install test/%%a -if %1.test/%%a -pr %2
+	conan install test/%%a -if %1.test/%%a -p %2
 ))
 
 mkdir %1
