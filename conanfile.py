@@ -12,8 +12,7 @@ class Roi3DFConan(ConanFile):
         "build_test_custom_with_operators": [True, False],
         "build_test_eigen": [True, False],
         "build_test_osg": [True, False],
-        "build_test_qt": [True, False],
-        "build_all_tests": [True, False]
+        "build_test_qt": [True, False]
     }
     default_options = {
         "build_test_cuda": False,
@@ -21,14 +20,13 @@ class Roi3DFConan(ConanFile):
         "build_test_custom_with_operators": False,
         "build_test_eigen": False,
         "build_test_osg": False,
-        "build_test_qt": False,
-        "build_all_tests": False
+        "build_test_qt": False
     }
 
     def requirements(self):
-        if self.options.build_test_osg or self.options.build_all_tests:
+        if self.options.build_test_osg:
             self.requires("openscenegraph/3.6.3@bincrafters/stable")
-        if self.options.build_test_eigen or self.options.build_all_tests:
+        if self.options.build_test_eigen:
             self.requires("eigen/3.3.7@conan/stable")
             
     def _configure_cmake(self):
@@ -39,14 +37,13 @@ class Roi3DFConan(ConanFile):
             self.options.build_test_custom_with_operators or \
             self.options.build_test_eigen or \
             self.options.build_test_osg or \
-            self.options.build_test_qt or \
-            self.options.build_all_tests
-        cmake.definitions["BUILD_EXAMPLE_CUDA"] = self.options.build_test_cuda or self.options.build_all_tests
-        cmake.definitions["BUILD_EXAMPLE_CUSTOM_NO_OPERATORS"] = self.options.build_test_custom_no_operators or self.options.build_all_tests
-        cmake.definitions["BUILD_EXAMPLE_CUSTOM_WITH_OPERATORS"] = self.options.build_test_custom_with_operators or self.options.build_all_tests
-        cmake.definitions["BUILD_EXAMPLE_EIGEN"] = self.options.build_test_eigen or self.options.build_all_tests
-        cmake.definitions["BUILD_EXAMPLE_OSG"] = self.options.build_test_osg or self.options.build_all_tests
-        cmake.definitions["BUILD_EXAMPLE_QT"] = self.options.build_test_qt or self.options.build_all_tests
+            self.options.build_test_qt
+        cmake.definitions["BUILD_EXAMPLE_CUDA"] = self.options.build_test_cuda
+        cmake.definitions["BUILD_EXAMPLE_CUSTOM_NO_OPERATORS"] = self.options.build_test_custom_no_operators
+        cmake.definitions["BUILD_EXAMPLE_CUSTOM_WITH_OPERATORS"] = self.options.build_test_custom_with_operators
+        cmake.definitions["BUILD_EXAMPLE_EIGEN"] = self.options.build_test_eigen
+        cmake.definitions["BUILD_EXAMPLE_OSG"] = self.options.build_test_osg
+        cmake.definitions["BUILD_EXAMPLE_QT"] = self.options.build_test_qt
         cmake.configure(source_dir="%s/cmake" % self.source_folder)
         return cmake
     

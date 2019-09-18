@@ -4,13 +4,6 @@ PROJECT( Roi3DF_Tests )
 
 SET_PROPERTY(GLOBAL PROPERTY USE_FOLDERS ON)
 
-SET( BUILD_EXAMPLE_CUDA OFF CACHE BOOL "Generate test for CUDA vector type" )
-SET( BUILD_EXAMPLE_CUSTOM_NO_OPERATORS OFF CACHE BOOL "Generate test for custom vector type without operators" )
-SET( BUILD_EXAMPLE_CUSTOM_WITH_OPERATORS OFF CACHE BOOL "Generate test for custom vector type with operators" )
-SET( BUILD_EXAMPLE_EIGEN OFF CACHE BOOL "Generate test for eigen vector type" )
-SET( BUILD_EXAMPLE_OSG OFF CACHE BOOL "Generate test for OSG vector type" )
-SET( BUILD_EXAMPLE_QT OFF CACHE BOOL "Generate test for QT vector type" )
-
 ADD_CUSTOM_TARGET( ${PROJECT_NAME} SOURCES
 	common/Roi3DF_test.h
 )
